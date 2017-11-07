@@ -5,16 +5,11 @@
 class TQueueItem
 {
 public:
-    TQueueItem(Figure &var);
+    TQueueItem(Figure *var_p);
     virtual ~TQueueItem();
-    // Resource Acquision Is Initialization
 
-    void add_next_item(TQueueItem *item);
-    void prev_next_item(TQueueItem *item);
-
-    TQueueItem *next;
-    TQueueItem *prev;
-    std::shared_ptr<Figure> var_p;
+    std::shared_ptr<TQueueItem> next;
+    std::shared_ptr<Figure> var_sp;
 };
 
 #endif // TQUEUEITEM_H

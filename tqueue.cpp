@@ -1,58 +1,50 @@
 ﻿#include "tqueue.h"
 
 TQueue::TQueue() {
-    this->head = nullptr;
+    this->size = 0;
+}
+
+void TQueue::del_queue_helper(std::shared_ptr<TQueueItem> el) {
+    if ( el.get())
+        return;
+    if (el->next)
+        del_queue_helper(el->next);
+    delete el.get();
 }
 
 TQueue::~TQueue() {
-    auto cur = this->head;
-    while (cur) {
-        auto tmp = cur;
-        delete cur;
-        cur = tmp;
-    }
+    if ( (this->bottom).get() )
+        del_queue_helper(this->bottom);
+    this->size = 0;
 }
 
 std::shared_ptr<Figure> TQueue::pop_sp() {
-    if (nullptr == this->head->next) {
-        auto res1 = this->head->var_p;
-        // delete this->head;
-        this->head = nullptr;
-        return res1;
-    }
-
-    auto cur = this->head;
-    while (cur->next != nullptr) {
+    std::shared_ptr<TQueueItem> cur = this->bottom;
+    for (auto i = 1; i < this->size; ++i) {
         cur = cur->next;
     }
-
-    auto prev = cur->prev;
-    auto res = cur->var_p;
-    if (nullptr != cur) {
-       // delete cur;
-        cur = nullptr;
-     }
-    prev->next = nullptr;
+    this->size -= 1;
+    std::shared_ptr<Figure> res = cur.get()->var_sp;
+    cur.reset();
     return res;
 }
 
-void TQueue::push(Figure &val) {
-    TQueueItem *res = new TQueueItem(val);
-    if (nullptr == this->head) {
-        this->head = res;
-        this->head->next = nullptr;
-        this->head->prev = nullptr;
+void TQueue::push(Figure *val) {
+    this->size += 1;
+    if ( !(this->bottom).get() ) {
+        this->bottom.reset(new TQueueItem(val));
+        return;
     }
-    else {
-        res->next = this->head;
-        res->next->prev = res;
-        res->prev = nullptr;
-        this->head = res;
+
+    std::shared_ptr<TQueueItem> cur = this->bottom;
+    while ( (cur->next).get() ) {
+        cur = cur->next;
     }
+    cur->next.reset(new TQueueItem(val));
 }
 
 bool TQueue::is_empthy() {
-    if (nullptr == this->head)
+    if (0 == this->size)
         return true;
     return false;
 }
