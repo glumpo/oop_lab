@@ -5,7 +5,7 @@ TQueue::TQueue() {
 }
 
 void TQueue::del_queue_helper(std::shared_ptr<TQueueItem> el) {
-    if ( el.get())
+    if ( !el.get())
         return;
     if (el->next)
         del_queue_helper(el->next);
@@ -13,34 +13,33 @@ void TQueue::del_queue_helper(std::shared_ptr<TQueueItem> el) {
 }
 
 TQueue::~TQueue() {
-    if ( (this->bottom).get() )
-        del_queue_helper(this->bottom);
-    this->size = 0;
+    while (!this->is_empthy())
+        this->pop_sp().reset();
 }
 
 std::shared_ptr<Figure> TQueue::pop_sp() {
-    std::shared_ptr<TQueueItem> cur = this->bottom;
-    for (auto i = 1; i < this->size; ++i) {
-        cur = cur->next;
+    std::shared_ptr<Figure> res = this->head->var_sp;
+    if (1 == this->size) {
+        this->head.reset();
+        this->bottom.reset();
+    }
+    else {
+        this->head = this->head->next;
     }
     this->size -= 1;
-    std::shared_ptr<Figure> res = cur.get()->var_sp;
-    cur.reset();
     return res;
 }
 
 void TQueue::push(Figure *val) {
-    this->size += 1;
-    if ( !(this->bottom).get() ) {
+    if (!this->bottom.get()) {
         this->bottom.reset(new TQueueItem(val));
-        return;
+        this->head = this->bottom;
     }
-
-    std::shared_ptr<TQueueItem> cur = this->bottom;
-    while ( (cur->next).get() ) {
-        cur = cur->next;
+    else {
+        this->bottom->next.reset(new TQueueItem(val));
+        this->bottom = this->bottom->next;
     }
-    cur->next.reset(new TQueueItem(val));
+    this->size += 1;
 }
 
 bool TQueue::is_empthy() {

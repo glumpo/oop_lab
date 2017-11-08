@@ -26,7 +26,11 @@ int main(int argc, char *argv[])
     t.push(new Rectangle(list, 4));
     t.push(new Rhombus(list2, 4));
 
-    t.pop_sp().get()->print_info();
+    TQueue t2 = TQueue();
+    TQueue t3 = TQueue();
+    t2.push(new Rectangle(list, 4));
+    t3.push(new Rectangle(list, 4));
+
     t.pop_sp().get()->print_info();
     return 0;
 }

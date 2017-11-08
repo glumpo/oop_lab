@@ -9,6 +9,7 @@ private:
     void del_queue_helper(std::shared_ptr<TQueueItem> el);
     size_t size;
 protected:
+    std::shared_ptr<TQueueItem> head;
     std::shared_ptr<TQueueItem> bottom;
 public:
     TQueue();
