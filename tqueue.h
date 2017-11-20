@@ -3,20 +3,22 @@
 #include "tqueueitem.h"
 #include "figure.h"
 
+
+template <class T>
 class TQueue
 {
 private:
-    void del_queue_helper(std::shared_ptr<TQueueItem> el);
+    void del_queue_helper(std::shared_ptr<TQueueItem<T>> el);
     size_t size;
 protected:
-    std::shared_ptr<TQueueItem> head;
-    std::shared_ptr<TQueueItem> bottom;
+    std::shared_ptr<TQueueItem<T>> head;
+    std::shared_ptr<TQueueItem<T>> bottom;
 public:
     TQueue();
     ~TQueue();
 
-    std::shared_ptr<Figure> pop_sp();
-    void push(Figure *val);
+    std::shared_ptr<T> pop_sp();
+    void push(T *val);
     bool is_empthy();
 };
 

@@ -2,14 +2,16 @@
 #define TQUEUEITEM_H
 #include "figure.h"
 #include <memory>
+
+template <class T>
 class TQueueItem
 {
 public:
-    TQueueItem(Figure *var_p);
+    TQueueItem(T *var_p);
     virtual ~TQueueItem();
 
     std::shared_ptr<TQueueItem> next;
-    std::shared_ptr<Figure> var_sp;
+    std::shared_ptr<T> var_sp;
 };
 
 #endif // TQUEUEITEM_H

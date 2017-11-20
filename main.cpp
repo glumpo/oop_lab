@@ -5,7 +5,11 @@
 #include "rectangle.h"
 #include "rhombus.h"
 #include "trapeze.h"
+
 #include "tqueue.h"
+#include "tqueue.cpp"
+
+#include "tqueueitem.cpp"
 
 int main(int argc, char *argv[])
 {
@@ -21,15 +25,10 @@ int main(int argc, char *argv[])
     list2[2] = {15, 15};
     list2[3] = {20, 0};
 
-    TQueue t = TQueue();
+    TQueue<Rectangle> t;
 
     t.push(new Rectangle(list, 4));
-    t.push(new Rhombus(list2, 4));
-
-    TQueue t2 = TQueue();
-    TQueue t3 = TQueue();
-    t2.push(new Rectangle(list, 4));
-    t3.push(new Rectangle(list, 4));
+    t.push(new Rectangle(list2, 4));
 
     t.pop_sp().get()->print_info();
     return 0;

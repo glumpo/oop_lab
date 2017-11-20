@@ -1,10 +1,12 @@
 ﻿#include "tqueue.h"
 
-TQueue::TQueue() {
+template <class T>
+TQueue<T>::TQueue() {
     this->size = 0;
 }
 
-void TQueue::del_queue_helper(std::shared_ptr<TQueueItem> el) {
+template <class T>
+void TQueue<T>::del_queue_helper(std::shared_ptr< TQueueItem<T> > el) {
     if ( !el.get())
         return;
     if (el->next)
@@ -12,13 +14,15 @@ void TQueue::del_queue_helper(std::shared_ptr<TQueueItem> el) {
     delete el.get();
 }
 
-TQueue::~TQueue() {
+template <class T>
+TQueue<T>::~TQueue() {
     while (!this->is_empthy())
         this->pop_sp().reset();
 }
 
-std::shared_ptr<Figure> TQueue::pop_sp() {
-    std::shared_ptr<Figure> res = this->head->var_sp;
+template <class T>
+std::shared_ptr<T> TQueue<T>::pop_sp() {
+    std::shared_ptr<T> res = this->head->var_sp;
     if (1 == this->size) {
         this->head.reset();
         this->bottom.reset();
@@ -30,19 +34,20 @@ std::shared_ptr<Figure> TQueue::pop_sp() {
     return res;
 }
 
-void TQueue::push(Figure *val) {
+template <class T>
+void TQueue<T>::push(T *val) {
     if (!this->bottom.get()) {
-        this->bottom.reset(new TQueueItem(val));
+        this->bottom.reset(new TQueueItem<T>(val));
         this->head = this->bottom;
-    }
-    else {
-        this->bottom->next.reset(new TQueueItem(val));
+    } else {
+        this->bottom->next.reset(new TQueueItem<T>(val));
         this->bottom = this->bottom->next;
     }
     this->size += 1;
 }
 
-bool TQueue::is_empthy() {
+template <class T>
+bool TQueue<T>::is_empthy() {
     if (0 == this->size)
         return true;
     return false;
