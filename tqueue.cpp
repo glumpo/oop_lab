@@ -1,4 +1,8 @@
 ﻿#include "tqueue.h"
+//#include "titerator.h"
+
+#ifndef TQUEUE_CPP
+#define TQUEUE_CPP
 
 template <class T>
 TQueue<T>::TQueue() {
@@ -53,4 +57,15 @@ bool TQueue<T>::is_empthy() {
     return false;
 }
 
+template<class T>
+TIterator<TQueueItem<T>, T> TQueue<T>::begin() {
+    return TIterator<TQueueItem<T>, T>(this->head);
+}
 
+template<class T>
+TIterator<TQueueItem<T>, T> TQueue<T>::end() {
+    return TIterator<TQueueItem<T>, T>(this->bottom);
+}
+
+
+#endif // TQUEU_CPP
