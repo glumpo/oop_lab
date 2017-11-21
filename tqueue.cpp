@@ -64,7 +64,7 @@ TIterator<TQueueItem<T>, T> TQueue<T>::begin() {
 
 template<class T>
 TIterator<TQueueItem<T>, T> TQueue<T>::end() {
-    return TIterator<TQueueItem<T>, T>(this->bottom);
+    return TIterator<TQueueItem<T>, T>(nullptr);
 }
 
 
