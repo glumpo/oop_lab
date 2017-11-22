@@ -35,9 +35,13 @@ int main(int argc, char *argv[])
 
     // t.pop_sp().get()->print_info();
 
-    for (TIterator<TQueueItem<Rectangle>, Rectangle> i = q.begin();
-         i != q.end();
-         ++i) {
+//    for (TIterator<TQueueItem<Rectangle>, Rectangle> i = q.begin();
+//         i != q.end();
+//         ++i) {
+//        i->print_info();
+//    }
+
+    for (auto i : q) {
         i->print_info();
     }
     return 0;
