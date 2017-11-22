@@ -10,7 +10,8 @@ HEADERS = \
    $$PWD/rhombus.h \
    $$PWD/tqueue.h \
    $$PWD/tqueueitem.h \
-   $$PWD/trapeze.h
+   $$PWD/trapeze.h \
+    titerator.h
 
 SOURCES = \
    $$PWD/coordinates.cpp \

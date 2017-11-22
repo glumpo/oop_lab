@@ -9,6 +9,7 @@
 #include "tqueue.h"
 #include "tqueue.cpp"
 #include "tqueueitem.cpp"
+#include "tqueueitem.h"
 
 #include "titerator.h"
 
@@ -34,7 +35,9 @@ int main(int argc, char *argv[])
 
     // t.pop_sp().get()->print_info();
 
-    for (auto i : q) {
+    for (TIterator<TQueueItem<Rectangle>, Rectangle> i = q.begin();
+         i != q.end();
+         ++i) {
         i->print_info();
     }
     return 0;
