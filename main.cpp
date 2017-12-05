@@ -13,6 +13,8 @@
 
 #include "titerator.h"
 
+#include "tbintree.h"
+
 int main(int argc, char *argv[])
 {
     coordinates list[4];
@@ -41,8 +43,20 @@ int main(int argc, char *argv[])
 //        i->print_info();
 //    }
 
-    for (auto i : q) {
-        i->print_info();
+//    for (auto i : q) {
+//        i->print_info();
+//    }
+
+    TBinTree<int, Rectangle> tree;
+    tree.add(3, new Rectangle(list, 4));
+    tree.add(4, new Rectangle(list2, 4));
+    tree.add(2, new Rectangle(list, 4));
+
+    if (tree.get(3).get()) {
+        std::cout << "No";
+    }
+    else {
+        std::cout << "It`s null";
     }
     return 0;
 }
