@@ -52,11 +52,16 @@ int main(int argc, char *argv[])
     tree.add(4, new Rectangle(list2, 4));
     tree.add(2, new Rectangle(list, 4));
 
-    if (tree.get(3).get()) {
-        std::cout << "No";
+    tree.get(3)->print_info();
+    tree.get(4)->print_info();
+    tree.get(2)->print_info();
+
+    std::cout << std::endl;
+    if (tree.get(8)) {
+        std::cout << "WTF?" << std::endl;
     }
     else {
-        std::cout << "It`s null";
+        std::cout << "nullptr" << std::endl;
     }
     return 0;
 }

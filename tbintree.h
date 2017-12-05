@@ -33,26 +33,26 @@ public:
 
     // TODO: Code Duplication in add and get
     bool add(Key key, Value *val) {
-        auto cur = this->root;
-        while (cur.get()) {
-            Key cur_key = cur->key;
+        std::shared_ptr< TBinTreeItem<Key, Value> > *cur;
+        cur = &(this->root);
+        while (cur->get()) {
+            Key cur_key = (*cur)->key;
             const int who_is_bigger = this->cmp(key, cur_key);
             if (1 == who_is_bigger) {
-                cur = cur->l;
+                cur = &((*cur)->l);
             }
             else if (-1 == who_is_bigger) {
-                cur = cur->r;
+                cur = &((*cur)->r);
             }
             else {
                 return false;
             }
         }
 
-        auto tmp = new TBinTreeItem<Key, Value>(key, val);
-        root.reset(tmp);
+        TBinTreeItem<Key, Value> *tmp;
+        tmp = new TBinTreeItem<Key, Value>(key, val);
+        cur->reset(tmp);
         tmp->var_sp->print_info();
-        int i = 0;
-        ++i;
         return true;
     }
 
