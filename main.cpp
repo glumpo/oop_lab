@@ -14,6 +14,7 @@
 #include "titerator.h"
 
 #include "tbintree.h"
+#include "tallocblock.h"
 
 int main(int argc, char *argv[])
 {
@@ -47,23 +48,18 @@ int main(int argc, char *argv[])
 //        i->print_info();
 //    }
 
-    TBinTree<int, Rectangle> tree;
-    tree.add(3, new Rectangle(list, 4));
-    tree.add(4, new Rectangle(list2, 4));
-    tree.add(2, new Rectangle(list, 4));
+//    TBinTree<int, Rectangle*> tree;
+//    tree.add(3, new Rectangle(list, 4));
+//    tree.add(4, new Rectangle(list2, 4));
+//    tree.add(2, new Rectangle(list, 4));
 
-    tree.pop(3)->print_info();
-    tree.pop(4)->print_info();
-    tree.pop(2)->print_info();
+//    bool *suc_p, suc = true;
+//    suc_p = &suc;
+//    tree.pop(3, suc_p)->print_info();
+//    tree.pop(4, suc_p)->print_info();
+//    tree.pop(2, suc_p)->print_info();
 
-    std::cout << std::endl;
-    if (tree.pop(2)) {
-        std::cout << "WTF?" << std::endl;
-    }
-    else {
-        std::cout << "nullptr" << std::endl;
-    }
-
+    TAllocBlock<Rectangle> aloc = TAllocBlock<Rectangle>(10);
 
     return 0;
 }
