@@ -30,11 +30,11 @@ int main(int argc, char *argv[])
     list2[2] = {15, 15};
     list2[3] = {20, 0};
 
-    TQueue<Rectangle> q;
+//    TQueue<Rectangle> q;
 
-    q.push(new Rectangle(list, 4));
-    q.push(new Rectangle(list2, 4));
-    q.push(new Rectangle(list2, 4));
+//    q.push(new Rectangle(list, 4));
+//    q.push(new Rectangle(list2, 4));
+//    q.push(new Rectangle(list2, 4));
 
     // t.pop_sp().get()->print_info();
 
@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
 //    tree.pop(4, suc_p)->print_info();
 //    tree.pop(2, suc_p)->print_info();
 
-    TAllocBlock<Rectangle> aloc = TAllocBlock<Rectangle>(10);
+    TAllocBlock<Rectangle> alloc = TAllocBlock<Rectangle>(10);
 
     return 0;
 }

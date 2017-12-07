@@ -2,12 +2,14 @@
 #define RECTANGLE_H
 #include "figure.h"
 
+#include <iostream>
+
 class Rectangle : public Figure
 {
 public:
     using Figure::Figure;
     Rectangle();
-    virtual ~Rectangle() {}
+    virtual ~Rectangle() {std::cout << "REC DIE!!" << std::endl;}
     double calculate_square() const override;
     void print_figure_name() const override;
 

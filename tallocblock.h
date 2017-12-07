@@ -14,19 +14,22 @@ private:
     unsigned int max_key_used;
     TBinTree<int, T*> free_blocks;
     TBinTree<int, T*> used_blocks;
+    T *base_memory;
 public:
     TAllocBlock(unsigned int count) {
         this->size = sizeof(T);
         this->count = count;
 
-        T* memory = (T*) malloc(this->size * this->count);
+        this->base_memory = (T*) malloc(this->size * this->count);
         for (unsigned int i = 0; i < count; ++i) {
-            this->free_blocks.add(i, memory+i);
+            this->free_blocks.add(i, this->base_memory+i);
         }
         this->max_key_free = this->free_blocks.max_key();
         this->max_key_used = 0;
     }
-    virtual ~TAllocBlock() { }
+    virtual ~TAllocBlock() {
+        free(this->base_memory);
+    }
 
     T *alloc() {
         if (this->free_blocks.is_empty())
@@ -36,17 +39,17 @@ public:
         this->max_key_free = this->free_blocks.max_key();
 
         this->max_key_used += 1;
-        this->used_blocks.add(this->max_key_used, res_p.get());
-        return res_p.get();
+        this->used_blocks.add(this->max_key_used, res_p);
+        return res_p;
     }
 
     void dealloc(T *ptr) {
-        free(ptr);
-        int *key_of_ptr = nullptr;
-        if (!this->used_blocks.find_first_key_by_value(ptr, key_of_ptr))
+        int key_of_ptr;
+        if (!this->used_blocks.find_first_key_by_value(ptr, &key_of_ptr))
             return;
+
         this->used_blocks.pop(key_of_ptr);
-        this->free_blocks.add(this->max_key_free + 1, prt);
+        this->free_blocks.add(this->max_key_free + 1, ptr);
         this->max_key_free += 1;
     }
 

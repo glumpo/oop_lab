@@ -30,7 +30,7 @@ bool TBinTree<Key, Value>::add(Key key, Value val) {
 template<class Key, class Value>
 Value TBinTree<Key, Value>::pop(Key key) {
     bool suc = true;
-    bool *suc_p = suc;
+    bool *suc_p = &suc;
     return pop(key, suc_p);
 }
 
