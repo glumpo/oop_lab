@@ -3,6 +3,11 @@
 #include <iostream>
 
 
+#define N_OF_BLOCKS_TO_ALLOCATE 10
+
+TAllocBlock<Figure> Figure::alloc(N_OF_BLOCKS_TO_ALLOCATE);
+
+
 Figure::Figure() {
     this->len_of_list = 1;
     this->list = new coordinates[this->len_of_list];
@@ -98,6 +103,14 @@ void Figure::print_info(std::ostream &os) const {
     os << std::endl;
 
     os << "S = " << calculate_square() << std::endl;
+}
+
+void *Figure::operator new(size_t size) {
+    return alloc.alloc();
+}
+
+void Figure::operator delete(void *p) {
+    alloc.dealloc(static_cast<Figure*>(p));
 }
 
 Figure& Figure::operator =(Figure &right) {

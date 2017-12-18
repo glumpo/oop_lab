@@ -2,6 +2,7 @@
 #define TALLOCBLOCK_H
 
 #include <cstdlib>
+#include <iostream>
 #include "tbintree.h"
 
 template <class T>
@@ -32,6 +33,7 @@ public:
     }
 
     T *alloc() {
+        std::cout << "ALLOCATING...\n";
         if (this->free_blocks.is_empty())
             return nullptr;
 

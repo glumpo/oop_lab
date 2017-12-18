@@ -59,7 +59,15 @@ int main(int argc, char *argv[])
 //    tree.pop(4, suc_p)->print_info();
 //    tree.pop(2, suc_p)->print_info();
 
-    TAllocBlock<Rectangle> alloc = TAllocBlock<Rectangle>(10);
+//    TAllocBlock<Rectangle> alloc = TAllocBlock<Rectangle>(10);
+//    auto p1 = alloc.alloc();
+//    new (p1) Rectangle(list2, 4);
+//    p1->print_info();
+//    alloc.dealloc(p1);
+
+    auto p = new Rectangle(list, 4);
+    p->print_info();
+    delete p;
 
     return 0;
 }
