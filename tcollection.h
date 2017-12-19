@@ -1,0 +1,4 @@
+#ifndef TCOLLECTION_H
+#define TCOLLECTION_H
+
+#endif // TCOLLECTION_H
