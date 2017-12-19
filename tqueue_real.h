@@ -1,6 +1,7 @@
-﻿#ifndef TQUEUE_H
-#define TQUEUE_H
+﻿#ifndef TQUEUE_REAL_H
+#define TQUEUE_REAL_H
 #include "tqueueitem.h"
+#include "tqueueitem.cpp"
 #include "figure.h"
 #include "titerator.h"
 
@@ -18,6 +19,7 @@ public:
     ~TQueue();
 
     std::shared_ptr<T> pop_sp();
+    std::shared_ptr<T> get();
     void push(T *val);
     bool is_empthy();
 
@@ -25,4 +27,4 @@ public:
     TIterator<TQueueItem<T>, T> end();
 };
 
-#endif // TQUEUE_H
+#endif // TQUEUE_REAL_H

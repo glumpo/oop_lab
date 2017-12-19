@@ -1,20 +1,19 @@
 ﻿// 27
 
 #include <iostream>
+
 #include "coordinates.h"
 #include "rectangle.h"
 #include "rhombus.h"
 #include "trapeze.h"
 
 #include "tqueue.h"
-#include "tqueue.cpp"
-#include "tqueueitem.cpp"
-#include "tqueueitem.h"
-
 #include "titerator.h"
 
 #include "tbintree.h"
 #include "tallocblock.h"
+
+#include "tcollection.h"
 
 int main(int argc, char *argv[])
 {
@@ -65,9 +64,11 @@ int main(int argc, char *argv[])
 //    p1->print_info();
 //    alloc.dealloc(p1);
 
-    auto p = new Rectangle(list, 4);
-    p->print_info();
-    delete p;
+//    auto p = new Rectangle(list, 4);
+//    p->print_info();
+//    delete p;
+
+    TCollection c;
 
     return 0;
 }

@@ -47,7 +47,7 @@ public:
 
     void dealloc(T *ptr) {
         int key_of_ptr;
-        if (!this->used_blocks.find_first_key_by_value(ptr, &key_of_ptr))
+        if (!this->used_blocks.key_by_value(ptr, &key_of_ptr))
             return;
 
         this->used_blocks.pop(key_of_ptr);

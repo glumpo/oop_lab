@@ -1,8 +1,8 @@
-﻿#include "tqueue.h"
+﻿#include "tqueue_real.h"
 //#include "titerator.h"
 
-#ifndef TQUEUE_CPP
-#define TQUEUE_CPP
+#ifndef TQUEUE_REAL_CPP
+#define TQUEUE_REAL_CPP
 
 template <class T>
 TQueue<T>::TQueue() {
@@ -38,6 +38,17 @@ std::shared_ptr<T> TQueue<T>::pop_sp() {
     return res;
 }
 
+/*
+ * WARNING
+ * Not thread safe!!!
+ * */
+template<class T>
+std::shared_ptr<T> TQueue::get() {
+    auto res = this->pop_sp();
+    this->push(res.get());
+    return res;
+}
+
 template <class T>
 void TQueue<T>::push(T *val) {
     if (!this->bottom.get()) {
@@ -68,4 +79,4 @@ TIterator<TQueueItem<T>, T> TQueue<T>::end() {
 }
 
 
-#endif // TQUEU_CPP
+#endif // TQUEU_REAL_CPP

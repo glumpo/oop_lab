@@ -24,14 +24,15 @@ bool TBinTree<Key, Value>::add(Key key, Value val) {
     TBinTreeItem<Key, Value> *tmp;
     tmp = new TBinTreeItem<Key, Value>(key, val);
     cur->reset(tmp);
+
+    this->num_of_els += 1;
     return true;
 }
 
 template<class Key, class Value>
 Value TBinTree<Key, Value>::pop(Key key) {
     bool suc = true;
-    bool *suc_p = &suc;
-    return pop(key, suc_p);
+    return pop(key, &suc);
 }
 
 template<class Key, class Value>
@@ -58,6 +59,7 @@ Value TBinTree<Key, Value>::pop(Key key, bool *sucsess) {
         return empty;
     }
 
+    this->num_of_els -= 1;
     Value res = (*cur)->var;
     if (!(*cur)->l.get() && !(*cur)->r.get()) {
         cur->reset();
@@ -85,6 +87,11 @@ Value TBinTree<Key, Value>::pop(Key key, bool *sucsess) {
 }
 
 template<class Key, class Value>
+unsigned int TBinTree::get_num_of_els() const {
+    return this->num_of_els;
+}
+
+template<class Key, class Value>
 Key TBinTree<Key, Value>::max_key() {
     auto cur = this->root;
     while (cur->r.get())
@@ -93,7 +100,7 @@ Key TBinTree<Key, Value>::max_key() {
 }
 
 template<class Key, class Value>
-bool TBinTree<Key, Value>::find_first_key_by_value(const Value &patern, Key *res) {
+bool TBinTree<Key, Value>::key_by_value(const Value &patern, Key *res) {
     return _find_first_key_by_value(patern, this->root, res);
 }
 
