@@ -1,6 +1,7 @@
 #ifndef TBINTREE_CPP
 #define TBINTREE_CPP
 
+
 #include "tbintree_real.h"
 
 template<class Key, class Value>
@@ -21,23 +22,18 @@ bool TBinTree<Key, Value>::add(Key key, Value val) {
         }
     }
 
-    TBinTreeItem<Key, Value> *tmp;
-    tmp = new TBinTreeItem<Key, Value>(key, val);
-    cur->reset(tmp);
+     TBinTreeItem<Key, Value> *tmp;
+     tmp = new TBinTreeItem<Key, Value>(key, val);
+    // (*cur) = std::make_shared<TBinTreeItem<Key, Value>>(key, val);
+     cur->reset(tmp);
 
     this->num_of_els += 1;
     return true;
 }
 
-template<class Key, class Value>
-Value TBinTree<Key, Value>::pop(Key key) {
-    bool suc = true;
-    return pop(key, &suc);
-}
 
 template<class Key, class Value>
-Value TBinTree<Key, Value>::pop(Key key, bool *sucsess) {
-    *sucsess = true;
+Value TBinTree<Key, Value>::pop(Key key) {
     std::shared_ptr< TBinTreeItem<Key, Value> > *cur;
     cur = &(this->root);
     while (cur->get()) {
@@ -54,7 +50,7 @@ Value TBinTree<Key, Value>::pop(Key key, bool *sucsess) {
         }
     }
     if (!cur->get()) {
-        *sucsess = false;
+        throw std::range_error("Key not found");
         Value empty;
         return empty;
     }
@@ -87,7 +83,34 @@ Value TBinTree<Key, Value>::pop(Key key, bool *sucsess) {
 }
 
 template<class Key, class Value>
-unsigned int TBinTree::get_num_of_els() const {
+Value TBinTree<Key, Value>::get(Key key) {
+    auto res = pop(key);
+    add(key, res);
+    return res;
+}
+
+template<class Key, class Value>
+TQueue<TBinTreeItem<Key, Value>> TBinTree<Key, Value>::get_items_queue() const {
+    TQueue<TBinTreeItem<Key, Value>> res;
+    if (is_empty())
+        return res;
+    return get_items_queue(this->root, res);
+}
+
+template<class Key, class Value>
+TQueue<TBinTreeItem<Key, Value>> TBinTree<Key, Value>::get_items_queue(std::shared_ptr< TBinTreeItem<Key, Value> > cur,
+                                                 TQueue<TBinTreeItem<Key, Value>> &q) const {
+    if (cur->l.get())
+        get_items_queue(cur->l, q);
+    if (cur->r.get())
+        get_items_queue(cur->r, q);
+    q.push(cur.get());
+    return q;
+}
+
+
+template<class Key, class Value>
+unsigned int TBinTree<Key, Value>::get_num_of_els() const {
     return this->num_of_els;
 }
 

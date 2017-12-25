@@ -1,4 +1,4 @@
-﻿// 27
+﻿ // 27
 
 #include <iostream>
 
@@ -69,6 +69,10 @@ int main(int argc, char *argv[])
 //    delete p;
 
     TCollection c;
+    c.push(new Rectangle(list, 4));
+//    c.push(new Rectangle(list, 4));
+//    c.push(new Rectangle(list, 4));
+    c.print_all();
 
     return 0;
 }

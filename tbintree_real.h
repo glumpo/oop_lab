@@ -2,8 +2,10 @@
 #define TBINTREE_H
 
 #include "tbintreeitem.h"
-#include <memory>
+#include "tqueue.h"
 
+#include <memory>
+#include <stdexcept>
 
 /*
  * Equal keys not allowed
@@ -33,15 +35,19 @@ public:
     TBinTree(int (*comparator)(Key inp, Key orig)) : cmp(comparator), num_of_els(0) {}
 
     // TODO: Code Duplication in add and get
+    // Need find function to rewrite add, pop and get
     bool add(Key key, Value val);
     Value pop(Key key);
-    Value pop(Key key, bool *sucsess);
+    Value get(Key key);
+    TQueue<TBinTreeItem<Key, Value> > get_items_queue() const;
+    TQueue<TBinTreeItem<Key, Value> > get_items_queue(std::shared_ptr<TBinTreeItem<Key, Value> > cur, TQueue<TBinTreeItem<Key, Value> > &q) const;
+
     unsigned int get_num_of_els() const;
 
     Key max_key();
     bool key_by_value(const Value &patern, Key *res);
 
-    bool is_empty() {
+    bool is_empty() const {
         return this->root.get() == nullptr;
     }
 };

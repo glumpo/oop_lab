@@ -10,7 +10,7 @@ class Figure
 protected:
     int len_of_list;
     coordinates *list;
-    static TAllocBlock<Figure> alloc;
+    // static TAllocBlock<Figure> alloc;
 public:
     Figure(const coordinates *list, int len_of_list);
     Figure(std::istream &is);
@@ -28,8 +28,8 @@ public:
     void print_info() const;
     void print_info(std::ostream &os) const;
 
-    void *operator new(size_t size);
-    void operator delete(void *p);
+//     void *operator new(size_t size);
+//     void operator delete(void *p);
 };
 
 std::ostream &operator <<(std::ostream &os, Figure &fig);

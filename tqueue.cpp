@@ -43,7 +43,7 @@ std::shared_ptr<T> TQueue<T>::pop_sp() {
  * Not thread safe!!!
  * */
 template<class T>
-std::shared_ptr<T> TQueue::get() {
+std::shared_ptr<T> TQueue<T>::get() {
     auto res = this->pop_sp();
     this->push(res.get());
     return res;

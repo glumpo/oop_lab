@@ -5,7 +5,7 @@
 
 #define N_OF_BLOCKS_TO_ALLOCATE 10
 
-TAllocBlock<Figure> Figure::alloc(N_OF_BLOCKS_TO_ALLOCATE);
+// TAllocBlock<Figure> Figure::alloc(N_OF_BLOCKS_TO_ALLOCATE);
 
 
 Figure::Figure() {
@@ -105,13 +105,13 @@ void Figure::print_info(std::ostream &os) const {
     os << "S = " << calculate_square() << std::endl;
 }
 
-void *Figure::operator new(size_t size) {
-    return alloc.alloc();
-}
+//void *Figure::operator new(size_t size) {
+//    return alloc.alloc();
+//}
 
-void Figure::operator delete(void *p) {
-    alloc.dealloc(static_cast<Figure*>(p));
-}
+//void Figure::operator delete(void *p) {
+//    alloc.dealloc(static_cast<Figure*>(p));
+//}
 
 Figure& Figure::operator =(Figure &right) {
     // check if it`s right = right

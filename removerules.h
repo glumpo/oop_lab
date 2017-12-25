@@ -2,17 +2,17 @@
 #define REMOCERULE_H
 #include "figure.h"
 
-class RemoceRule
+class RemoveRule
 {
 public:
     virtual bool does_match(Figure *p) = 0;
 };
 
 
-class RemoceRuleAll : public RemoceRule
+class RemoveRuleAll : public RemoveRule
 {
 public:
-    RemoceRuleAll() {}
+    RemoveRuleAll() {}
     bool does_match(Figure *p) override {
         return true;
     }

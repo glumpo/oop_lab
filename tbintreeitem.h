@@ -7,7 +7,12 @@ template <class Key, class Value>
 class TBinTreeItem
 {
 public:
-    TBinTreeItem(Key key, Value var): var(var), key(key) {}
+    TBinTreeItem(Key key, Value var) {
+        this->var = var;
+        this->key = key;
+        r.reset();
+        l.reset();
+    }
     virtual ~TBinTreeItem() {}
 
     Key key;
