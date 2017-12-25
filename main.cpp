@@ -47,10 +47,11 @@ int main(int argc, char *argv[])
 //        i->print_info();
 //    }
 
-//    TBinTree<int, Rectangle*> tree;
-//    tree.add(3, new Rectangle(list, 4));
-//    tree.add(4, new Rectangle(list2, 4));
+//    TBinTree<int, Figure*> tree;
+//    tree.add(0, new Rectangle(list, 4));
+//    tree.add(1, new Rectangle(list2, 4));
 //    tree.add(2, new Rectangle(list, 4));
+
 
 //    bool *suc_p, suc = true;
 //    suc_p = &suc;
@@ -68,11 +69,14 @@ int main(int argc, char *argv[])
 //    p->print_info();
 //    delete p;
 
-    TCollection c;
+    TCollection c = TCollection();
     c.push(new Rectangle(list, 4));
-//    c.push(new Rectangle(list, 4));
-//    c.push(new Rectangle(list, 4));
-    c.print_all();
+    c.push(new Rectangle(list, 4));
+    c.push(new Rectangle(list, 4));
+    c.push(new Rectangle(list, 4));
+    c.push(new Rectangle(list, 4));
+    c.push(new Rectangle(list, 4));
+//    c.print_all();
 
     return 0;
 }

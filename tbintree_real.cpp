@@ -24,7 +24,6 @@ bool TBinTree<Key, Value>::add(Key key, Value val) {
 
      TBinTreeItem<Key, Value> *tmp;
      tmp = new TBinTreeItem<Key, Value>(key, val);
-    // (*cur) = std::make_shared<TBinTreeItem<Key, Value>>(key, val);
      cur->reset(tmp);
 
     this->num_of_els += 1;

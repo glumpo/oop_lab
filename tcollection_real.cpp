@@ -5,10 +5,20 @@ TCollection::TCollection() {
 }
 
 void TCollection::push(Figure *fig) {
-    if (this->body.is_empthy() || this->body.get()->get_num_of_els() >= 5) {
+    if (this->body.is_empthy()) {
         this->body.push(new TBinTree<int, Figure*>());
     }
-    this->body.get()->add(num_for_tree, fig);
+    auto t = this->body.get();
+    if (t->get_num_of_els() >= 5) {
+        this->body.push(new TBinTree<int, Figure*>());
+    }
+
+//    if (this->body.is_empthy() || this->body.get()->get_num_of_els() >= 5) {
+//        this->body.push(new TBinTree<int, Figure*>());
+//    }
+
+    t = this->body.get();
+    t->add(num_for_tree, fig);
     ++num_for_tree;
 }
 

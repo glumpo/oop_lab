@@ -24,14 +24,18 @@ private:
      */
     int (*cmp)(const Key inp, const Key orig);
 public:
-    TBinTree() : cmp([](const Key inp, const Key orig) {
-        if (inp < orig)
-            return 1;
-        if (inp > orig)
-            return -1;
-        else
-            return 0;
-    }), num_of_els(0) {root.reset();}
+    TBinTree() {
+        cmp = [](const Key inp, const Key orig) {
+            if (inp < orig)
+                return 1;
+            if (inp > orig)
+                return -1;
+            else
+                return 0;
+        };
+        num_of_els = 0;
+        root.reset();
+    }
     TBinTree(int (*comparator)(Key inp, Key orig)) : cmp(comparator), num_of_els(0) {}
 
     // TODO: Code Duplication in add and get
